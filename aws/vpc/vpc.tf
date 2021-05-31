@@ -24,6 +24,7 @@ resource "aws_subnet" "public_subnet" {
   count                   = var.create_vpc && length(var.public_cidr_block) > 0 ? length(var.public_cidr_block) : 0
   vpc_id                  = aws_vpc.vpc[0].id
   cidr_block              = var.public_cidr_block[count.index]
+  availability_zone       = var.azs[count.index]
   map_public_ip_on_launch = "true"
   tags                    = var.public_subnet_tag[count.index]
 }
@@ -33,6 +34,7 @@ resource "aws_subnet" "private_subnet" {
   count                   = var.create_vpc && length(var.private_cidr_block) > 0 ? length(var.private_cidr_block) : 0
   vpc_id                  = aws_vpc.vpc[0].id
   cidr_block              = var.private_cidr_block[count.index]
+  availability_zone       = var.azs[count.index]
   map_public_ip_on_launch = "false"
   tags                    = var.private_subnet_tag[count.index]
 }

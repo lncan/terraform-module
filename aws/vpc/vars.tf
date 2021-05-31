@@ -75,3 +75,9 @@ variable "single_nat_gateway" {
   description = "Should be true if you want to provision a single shared NAT Gateway across all of your private networks"
   default     = true
 }
+
+variable "azs" {
+  type        = list(string)
+  description = "List of availability zones for subnets"
+  default     = []
+}
